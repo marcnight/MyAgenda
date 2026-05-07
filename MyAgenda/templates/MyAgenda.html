@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MyAgenda - Login{% endblock %}
+
+{% block content %}
+<div class="container">
+    <br/><br/>
+    <h1 class="header center white-text">Acesse seus Lembretes e observações de onde estiver</h1>
+    <div class="row center">
+        <h5 class="header col s12 light white-text">Ferramenta compacta para nunca mais esquecer o que é importante</h5>
+    </div>
+    <div class="row center">
+        <div class="container">
+            <div class="row">
+                <div class="col m12">
+                    <form action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="login-box">
+                            <h4>Login</h4>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label for="username">Digite seu usuario</label>
+                                    <input type="text" id="username" name="username" class="validate"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="password" type="password" name="password" class="validate"/>
+                                    <label for="password">Digite sua senha</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Entrar</button>
+                            <a class="btn btn-primary" href="{% url 'cadastro' %}">Cadastrar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/><br/>
+</div>
+{% endblock %}

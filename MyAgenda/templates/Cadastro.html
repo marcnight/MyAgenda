@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MyAgenda - Cadastro{% endblock %}
+
+{% block content %}
+<div class="container">
+    <br/><br/>
+    <h1 class="header center white-text">Não Perca tempo Cadastre-se Agora</h1>
+    <div class="row center">
+        <h5 class="header col s12 light white-text">Digite um seu nome de usuario e uma senha Para poder utilizar a plataforma</h5>
+    </div>
+    <div class="col m12">
+        <form action="{% url 'cadastro' %}" method="POST">
+            {% csrf_token %}
+            <div class="login-box">
+                <h4>Cadastro</h4>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label for="username">Digite seu Usuario</label>
+                        <input type="text" id="username" name="username" class="validate"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" type="password" name="password" class="validate"/>
+                        <label for="password">Digite sua senha</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn wave-effect" id="btn-salvar">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+    <br/><br/><br/>
+</div>
+{% endblock %}

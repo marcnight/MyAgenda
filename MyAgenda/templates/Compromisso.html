@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MyAgenda - Compromisso{% endblock %}
+
+{% block content %}
+<div class="container">
+    <br/><br/>
+    <div class="row center"></div>
+    <br/><br/>
+    <h5 class="header col s12 light white-text">Ferramenta moderna para Gerenciamento Pessoal</h5>
+    
+    <div align="center">
+        <form action="{% url 'compromisso' %}" method="POST">
+            {% csrf_token %}
+            <div class="input-field">
+                <input type="text" id="TituloCompromisso" name="titulocomp">
+                <label for="TituloCompromisso">Digite o titulo do seu Compromisso</label>
+            </div>
+            <div class="input-field">
+                <div align="center">Digite a descrição do seu Compromisso</div>
+                <input type="text" id="DescricaoCompromisso" name="Descricaocomp">
+                <label for="DescricaoCompromisso">Digite a descrição do seu Compromisso</label>
+            </div>
+            <div class="input-field">
+                <div align="center">Digite a data do seu Compromisso</div>
+                <input type="date" id="DataCompromisso" name="Datacomp">            
+            </div>
+            <div align="center">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="{% url 'logado' %}" class="btn btn-primary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

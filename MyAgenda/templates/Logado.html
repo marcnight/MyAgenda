@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MyAgenda - Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <br/><br/>
+    <h1 class="header center white-text">Usuário: {{ user.username }}</h1>
+    <div class="row center">
+        <div>Seja bem vindo novamente a sua Plataforma de Gerenciamento pessoal:</div>
+    </div>
+    <div class="row center">
+        <div class="row">
+            <div>O que temos para Hoje, um Compromisso ou uma Anotação</div>
+        </div>
+        <div class="container">
+            <a class="btn btn-primary" href="{% url 'anotacao' %}">Anotação</a>
+            <a class="btn btn-primary" href="{% url 'compromisso' %}">Compromisso</a>
+            <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Sair</button>
+            </form>
+        </div>
+    </div>
+    <br/><br/>
+    
+    <h4 class="white-text">Seus Compromissos</h4>
+    {% if compromissos %}
+        <ul class="collection">
+            {% for compromisso in compromissos %}
+                <li class="collection-item">{{ compromisso.data }} - <strong>{{ compromisso.titulo }}</strong>: {{ compromisso.descricao }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="white-text">Nenhum compromisso cadastrado.</p>
+    {% endif %}
+    
+    <h4 class="white-text">Suas Anotações</h4>
+    {% if anotacoes %}
+        <ul class="collection">
+            {% for anotacao in anotacoes %}
+                <li class="collection-item"><strong>{{ anotacao.titulo }}</strong>: {{ anotacao.texto }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="white-text">Nenhuma anotação cadastrada.</p>
+    {% endif %}
+</div>
+{% endblock %}

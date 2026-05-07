@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MyAgenda - Anotação{% endblock %}
+
+{% block content %}
+<div class="container">
+    <br/><br/>
+    <div class="row center"></div>
+    <br/><br/>
+    <h5 class="header col s12 light white-text">Ferramenta moderna para Gerenciamento Pessoal</h5>
+    
+    <div align="center"> 
+        <form action="{% url 'anotacao' %}" method="POST">
+            {% csrf_token %}
+            <div class="input-field col s12">
+                <input type="text" id="TituloAnotacao" name="titulo">
+                <label for="TituloAnotacao">Coloque aqui o titulo da sua anotação</label> 
+            </div>
+            <div align="center">
+                <div class="input-field">
+                    <input type="text" id="TextoAnotacao" name="texto">
+                    <label for="TextoAnotacao">Coloque aqui a descrição do seu lembrete</label>
+                </div>  
+            </div>
+            <div align="center">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="{% url 'logado' %}" class="btn btn-primary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

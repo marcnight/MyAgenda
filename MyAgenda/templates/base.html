@@ -1,0 +1,68 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+    <title>{% block title %}MyAgenda{% endblock %}</title>
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Agenda de Compromissos e Anotações">
+    <meta name="keywords" content="Agenda">
+    <meta name="author" content="Marcos Gonçalves">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div id="banner-gradient" class="section no-pad-bot">
+        <nav role="navigation" class="bg-none">
+            <div class="nav-wrapper container">
+                <a id="logo-container" href="{% url 'homepage' %}" class="brand-logo white-text">MyAgenda</a>
+                <ul class="right hide-on-med-and-down">
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'anotacao' %}" class="white-text">Anotação</a></li>
+                        <li><a href="{% url 'compromisso' %}" class="white-text">Compromisso</a></li>
+                        <li><a href="{% url 'logout' %}" class="white-text">Sair</a></li>
+                    {% endif %}
+                </ul>
+                <ul id="nav-mobile" class="side-nav">
+                    <li><a href="{% url 'homepage' %}">Home</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logado' %}">Dashboard</a></li>
+                        <li><a href="{% url 'logout' %}">Sair</a></li>
+                    {% else %}
+                        <li><a href="{% url 'cadastro' %}">Cadastro</a></li>
+                    {% endif %}
+                </ul>
+                <a href="#" data-activates="nav-mobile" class="button-collapse white-text"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+    </div>
+
+    {% if messages %}
+        <div class="container">
+            {% for message in messages %}
+                <div class="card-panel {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+    <footer class="page-footer light-blue gram-footer">
+        <div class="footer-copyright">
+            <div class="container">Produzido por Marcos Gonçalves</div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+        $('.button-collapse').sideNav();
+        {% block extra_js %}{% endblock %}
+    </script>
+</body>
+</html>
